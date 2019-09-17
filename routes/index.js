@@ -7,17 +7,17 @@ let User = require ('../models/user')
 
 
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
     res.render('landing');
 })
 
 // ===
 //Auth Routes
-router.get('/register',(req,res)=>{
+router.get('/register',async(req,res)=>{
     res.render('register');
 })
 // This route wiil handle sign up logic
-router.post('/register',(req,res)=>{
+router.post('/register',async(req,res)=>{
     let newUser=new User({username: req.body.username});
     User.register(newUser, req.body.password, (err, user)=>{
         if (err){
@@ -31,7 +31,7 @@ router.post('/register',(req,res)=>{
     });
 })
 // show  login form
-router.get('/login', (req, res)=>{
+router.get('/login', async(req, res)=>{
 res.render('login');
 
 })
@@ -39,12 +39,12 @@ res.render('login');
 router.post('/login',passport.authenticate('local',{
     successRedirect:'/campgrounds',
     failureRedirect:'/login'
-    }),(req,res)=>{
+    }),async(req,res)=>{
 })
 
 
 // logout rout
-router.get('/logout',(req,res)=>{
+router.get('/logout',async(req,res)=>{
     req.logout();
     req.flash('success','You are successfully Logged out');
     res.redirect('/campgrounds');
