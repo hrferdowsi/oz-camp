@@ -47,6 +47,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // seting the mongoose on the database
+// mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
+
 mongoose.connect("mongodb+srv://hrferdowsi:Msi+1992@cluster0-glrab.mongodb.net/test?retryWrites=true&w=majority", { 
     useNewUrlParser: true,
     useCreateIndex:true 
