@@ -2,43 +2,87 @@
 <html lang="en">
 
 <head>
-    <title>YelpCamp</title>
+    <title>OZcamp</title>
+    <!-- Next line is to make the code compatible with mobile -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheet/main.css">
+
+    <!-- our stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/stylesheet/main.css">
+
+    <!-- bootstrap and fontawesome -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body>
+
+    <!-- starting navbar -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class='navbar-brand' href="/"> YelpCamp</a>
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+ 
             </div>
-            <div class="collapse navbar-collapse">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- left side of the page  -->
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/campgrounds"> <i class="fas fa-home"></i> Home</a></li>
+
+                    <!-- You may add the "About" and "Content" later -->
+
+                            <!-- <li><a href="">Contact</a></li>  -->
+                </ul>
+                <!-- right side of the page -->
+
                 <ul class="nav navbar-nav navbar-right">
                     <%if (!currentUser){ %>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Sign Up</a></li>
+                    <li><a href="/register">Sign Up <i class="fas fa-user-plus"></i> </a></li>
+                    <li><a href="/login">Login <i class="fas fa-user"></i></a></li>
                     <%}else{%>
-                    <li><a href='#'>Signed in as: <%=currentUser.username%></a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href='#'> <%=currentUser.username%> <i class="fas fa-user-check"></i></a></li>
+                    <li><a href="/logout">Logout <i class="fas fa-sign-out-alt"></i></a></li>
                     <%}%>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    <% if(error && error.length >0){%>
-        <div class="container">
-            <div class='alert alert-danger' role="alert">
-                 <p><%=error%></p> 
+                </ul>
+                    
             </div>
         </div>
+    </nav>
+    
+<% if(error && error.length >0){%>
+    <div class="container">
+        <div class='alert alert-danger' role="alert">
+            <p><%=error%></p>
+        </div>
+    </div>
     <%}%>
-    <%if(success && success.length >0){%>
-        <div class="container">
-            <div class='alert alert-success' role="alert">
-                <p><%=success%></p>
-            </div>
+<%if(success && success.length >0){%>
+    <div class="container">
+        <div class='alert alert-success' role="alert">
+            <p><%=success%></p>
         </div>
+    </div>
     <%}%>
