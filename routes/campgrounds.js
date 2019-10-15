@@ -40,8 +40,10 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         username: req.user.username
     }
     geocoder.geocode(req.body.location, function (err, data) {
+        console.log(req.body.location);
+
       if (err || !data.length) {
-        req.flash('error', 'Invalid address');
+        req.flash('error', `Invalid address ${req.body.location}`);
         return res.redirect('back');
       }
       var lat = data[0].latitude;
