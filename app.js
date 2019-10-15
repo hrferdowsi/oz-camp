@@ -52,17 +52,6 @@ passport.deserializeUser(User.deserializeUser());
 // seting the mongoose on the database
 
 let url =process.env.DATABASEURL||"mongodb://localhost:27017/oz_camp";
-// mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
-
-// mongoose.connect("mongodb+srv://hrferdowsi:cFX2Xy1qnD8QOXh3@cluster0-glrab.mongodb.net/test?retryWrites=true&w=majority", { 
-//     useNewUrlParser: true,
-//     useCreateIndex:true 
-// }).then(()=>{
-//     console.log('connected to DB');
-// }).catch(err =>{
-//     console.log(`Error: ${err.message}`);
-// });
-
 
 mongoose.connect(url, { 
     useNewUrlParser: true,
@@ -75,8 +64,6 @@ mongoose.connect(url, {
 
 mongoose.set('useFindAndModify', false);
 
-// seed DataBase() to feed our DB:
-// seedDB();
 
 //passing current user to every single templates:
 app.use(async (req,res,next) => {
