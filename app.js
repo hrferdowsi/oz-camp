@@ -1,3 +1,6 @@
+require('dotenv').config(); //<--- this for environment variables
+
+
 const express = require('express'),
     app = express(),
     bodyParser = require("body-parser"),
@@ -38,7 +41,7 @@ app.use(require ('express-session')({
     secret: "This a key to encode the YelpCamp app login",
     resave: false,
     saveUninitialized: false
-}))
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,7 +51,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // seting the mongoose on the database
 
-let url =process.env.DATABASEURL||"mongodb://localhost:27017/yelp_camp";
+let url =process.env.DATABASEURL||"mongodb://localhost:27017/oz_camp";
 // mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
 
 // mongoose.connect("mongodb+srv://hrferdowsi:cFX2Xy1qnD8QOXh3@cluster0-glrab.mongodb.net/test?retryWrites=true&w=majority", { 
@@ -76,12 +79,22 @@ mongoose.set('useFindAndModify', false);
 // seedDB();
 
 //passing current user to every single templates:
-app.use((req,res,next)=>{
+app.use(async (req,res,next) => {
     res.locals.currentUser = req.user;
+//to handle notification
+    if(req.user) {
+        try {
+          let user = await User.findById(req.user._id).populate('notifications', null, { isRead: false }).exec();
+          res.locals.notifications = user.notifications.reverse();
+        } catch(err) {
+          console.log(err.message);
+        }
+       };
+// to handle flash errors
     res.locals.error = req.flash('error');
     res.locals.success = req.flash('success');
     next();
-})
+});
 
 // RESTful Routes:
 // INDEX            /campgrounds            GET
@@ -100,4 +113,4 @@ app.use('/campgrounds/:id/comments',commentRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("server is running" );
-})
+});

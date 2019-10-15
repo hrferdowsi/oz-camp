@@ -17,3 +17,9 @@
 #delete-comment{
     display: inline;
 }
+
+/*map */
+#map{
+    height: 400px;
+    width:100%;
+}
