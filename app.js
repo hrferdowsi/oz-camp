@@ -11,8 +11,7 @@ const express = require('express'),
     LocalStrategy = require ('passport-local'),
     Campground = require('./models/campground'),
     Comment = require ('./models/comment'),
-    User   = require ('./models/user'),
-    seedDB = require('./seeds');
+    User   = require ('./models/user');
 
 
 
