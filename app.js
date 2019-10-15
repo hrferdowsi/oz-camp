@@ -38,7 +38,7 @@ app.use(flash());
  
 // passport configuration
 app.use(require ('express-session')({
-    secret: "This a key to encode the YelpCamp app login",
+    secret: "This is a key to encode the OZ Camp app login",
     resave: false,
     saveUninitialized: false
 }));
